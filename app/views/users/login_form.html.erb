@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="box-heading">
+        ログイン
+    </div>
+    <div class="box-body">
+        <%= form_tag("/login") do %>
+            <div class="form-group">
+                <label>ユーザ名</label>
+                <input name ="userid" value="<%= @userid %>" class="form-control bootstrap-form">
+            </div>
+            <div class="form-group">
+                <label>パスワード</label>
+                <input type="password" name ="password" value="<%= @password %>" class="form-control bootstrap-form">
+            </div>
+            <input type="submit" value="ログイン" class="btn btn-default">
+        <% end %>
+    </div>
+</div>
