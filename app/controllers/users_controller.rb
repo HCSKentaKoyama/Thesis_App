@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     before_action :forbid_login_user, {only: [:login_form, :login]}
 
     def login
-        @user = User.find_by(userid: params[:userid])
+        @user = User.find_by(userid: params[:userid],enrolledFlag: true)
         if @user && @user.authenticate(params[:password])
             session[:userid] = @user.userid
             flash[:notice] = "ログインしました"
