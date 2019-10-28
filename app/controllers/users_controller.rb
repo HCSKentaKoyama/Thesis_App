@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_action :authenticate_user, {only: [:index,:logout]}
+    before_action :authenticate_user, {only: [:index,:logout,:insert,:add_form]}
     before_action :forbid_login_user, {only: [:login_form, :login]}
 
     def login
@@ -20,6 +20,10 @@ class UsersController < ApplicationController
         @user = User.new
     end
 
+    def add_form
+        @user = User.new
+    end
+
     def index
 
     end
@@ -28,5 +32,23 @@ class UsersController < ApplicationController
         session[:userid] = nil
         flash[:notice] = "ログアウトしました"
         redirect_to("/login")
+    end
+
+    def insert
+        @user = User.new(
+            userid: params[:userid],
+            password: params[:password],
+            name: params[:name]
+        )
+        if @user.save
+            flash[:notice] = "ユーザ登録が完了しました"
+            redirect_to("/index")
+        else
+            flash[:notice] = "登録できなかったよ"
+            @userid = params[:userid]
+            @password = params[:password]
+            @name = params[:name]
+            render("users/add_form")
+        end
     end
 end

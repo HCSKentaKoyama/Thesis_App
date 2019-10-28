@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   post "login" => "users#login"
   post "logout" => "users#logout"
 
-  get "index" => "users#index"
+  get "new" => "users#add_form"
+  post "users/insert" =>"users#insert"
 
+  get "index" => "users#index"
   get "/" => "users#index"
 end
