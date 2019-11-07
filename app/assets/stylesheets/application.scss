@@ -19,3 +19,114 @@
 // Bootstrap Sass
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.bootstrap-date {
+    display: inline-block;
+    width: auto;
+}
+
+/* universal */
+body {
+    padding-top: 60px;
+    background-color: #f5f8fa;
+}
+.center {
+    text-align: center;
+    h1 {
+        margin-bottom: 10px;
+    }
+}
+
+.main{
+    position: absolute;
+    width: 100%;
+    //height: auto;
+    min-height: 100%;
+}
+.container{
+    max-width: 700px;
+    margin: 30px auto;
+    padding-left: 30px;
+    padding-right: 30px;
+    clear: both;
+}
+
+.box-heading{
+    font-weight: 300;
+    margin: 60px 0 20px;
+    font-size: 48px;
+    color: #bcc8d4;
+}
+
+.box-body{
+    padding: 20px 30px;
+    background-color: white;
+    overflow: hidden;
+    box-shadow: 0 2px 6px #c1ced7;
+    //width: 100%;
+}
+
+/* typography */
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1;
+}
+
+h1 {
+    font-size: 3em;
+    letter-spacing: -2px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2.2em;
+    letter-spacing: -1px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: normal;
+    color: #777;
+}
+
+p {
+    font-size: 1.1em;
+    line-height: 1.7em;
+}
+
+/* header */
+#logo {
+    float: left;
+    margin-right: 10px;
+    font-size: 1.7em;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    padding: 10px;
+    font-weight: bold;
+    &:hover {
+        color: #fff;
+        text-decoration: none;
+    }
+}
+
+/* users.loginform,createform */
+.bootstrap-form {
+    width: 65%;
+}
+
+/* task.index */
+.bootstrap-text {
+    width: 85%;
+}
+
+.bootstrap-date {
+    display: inline-block;
+    width: auto;
+}
+
+.alt-table-responsive {
+    width: 100%;
+    overflow-y: hidden;
+    overflow-x: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    -webkit-overflow-scrolling: touch;
+}

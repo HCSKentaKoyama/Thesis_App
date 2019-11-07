@@ -1,0 +1,43 @@
+<% cntNo = 1 %>
+
+<div class="container">
+    <div class="box-heading">
+        在籍従業員一覧
+    </div>
+    <div class="box-body alt-table-responsive">
+        <table class="table table-hover alt-table-responsive">
+            <thead>
+                <tr>
+                    <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        No.
+                    </th>
+                    <th class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                        ユーザID
+                    </th>
+                    <th class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                        名前
+                    </th>
+                    <th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        店長
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @users.each do |user| %>
+                    <% if user.enrolledFlag == true %>
+                        <%= link_to "/edit/#{user.userid}" do %>
+                            <tr>
+                                <th><%= link_to("#{cntNo}","/edit/#{user.userid}") %></th>
+                                <th><%= link_to("#{user.userid}","/edit/#{user.userid}") %></th>
+                                <th><%= link_to("#{user.name}","/edit/#{user.userid}") %></th>
+                                <th><%= link_to("#{'☆' if user.managerFlag}","/edit/#{user.userid}") %></th>
+                            </tr>
+                        <% end %>
+                        <% cntNo += 1 %>
+                    <% end %>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
+

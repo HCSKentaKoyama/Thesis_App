@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_action :authenticate_user, {only: [:index,:logout,:insert,:add_form]}
+    before_action :authenticate_user, {only: [:index,:logout,:insert,:add_form,:list,:edit,:update]}
     before_action :forbid_login_user, {only: [:login_form, :login]}
 
     def login
@@ -49,6 +49,29 @@ class UsersController < ApplicationController
             @password = params[:password]
             @name = params[:name]
             render("users/add_form")
+        end
+    end
+
+    def list
+        @users = User.all
+    end
+
+    def edit
+        @user = User.find_by(userid: params[:userid])
+    end
+
+    def update
+        @user = User.find_by(userid: params[:userid])
+        @user.userid = params[:userid]
+        @user.password = params[:password]
+        @user.name = params[:name]
+        @user.enrolledFlag = params[:enrolledFlag]
+        if @user.save
+            flash[:notice] = "更新しました"
+            redirect_to("/list")
+        else
+            flash[:notice] = "更新できなかったよ"
+            redirect_to("/list")
         end
     end
 end

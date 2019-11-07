@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="box-heading">
+        次月 スケジュール希望
+    </div>
+    <div class="box-body">
+        <div class="form-title">
+            <h1><%= @currentYear %>年</h1>
+            <h2><%= @nextMonth %>月</h2>
+        </div>
+        <%= form_tag("/requests/entry",method: :post) do %>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <th>日</th>
+                        <th>曜日</th>
+                        <th>出勤時刻</th>
+                        <th>退勤時刻</th>
+                    </thead>
+                    <tbody>
+                    <% for day in 1..@lastDay %>
+                    <tr>
+                        <th>
+                            <%= day %>
+                        </th>
+                        <th>
+                            <%= %w(日 月 火 水 木 金 土)[Date.new(@currentYear,@nextMonth,day).wday]%>
+                        </th>
+                        <td>
+                            <%= time_select('request[timeToIn]',:time,{prompt: true,ignore_data: true,:minute_step => 30,:index => day,include_blank: true}, {class: "form-control bootstrap-date"}) %>
+                        </td>
+                        <td>
+                            <%= time_select('request[timeToOut]',:time,{prompt: true,ignore_data: true,:minute_step => 30,:index => day,include_blank: true}, {class: "form-control bootstrap-date"}) %>
+                        </td>
+                    </tr>
+                    <% end %>
+                    </tbody>
+                </table>
+            </div>
+            <input type="hidden" name="year" value="<%= @currentYear %>">
+            <input type="hidden" name="month" value="<%= @nextMonth %>">
+            <input type="hidden" name="lastDay" value="<%= @lastDay %>">
+            <input type="submit" value="登録" class="btn btn-default">
+        <% end %>
+    </div>
+</div>

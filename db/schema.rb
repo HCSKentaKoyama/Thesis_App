@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_17_072457) do
+ActiveRecord::Schema.define(version: 2019_11_06_060011) do
 
   create_table "requests", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "year", null: false
@@ -18,10 +18,9 @@ ActiveRecord::Schema.define(version: 2019_10_17_072457) do
     t.integer "day", null: false
     t.time "timeToIn", null: false
     t.time "timeToOut", null: false
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_requests_on_user_id"
+    t.string "userid"
   end
 
   create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -30,10 +29,9 @@ ActiveRecord::Schema.define(version: 2019_10_17_072457) do
     t.integer "day", null: false
     t.time "timeToIn", null: false
     t.time "timeToOut", null: false
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_schedules_on_user_id"
+    t.string "userid"
   end
 
   create_table "states", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

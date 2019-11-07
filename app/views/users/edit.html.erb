@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="box-heading">
+        ユーザ情報
+    </div>
+    <div class="box-body">
+    <button type="button" onclick="history.back()" class="btn btn-default">リストに戻る</button><br>
+        <%= form_tag("/update") do%>
+            <div class="form-group">
+                <label>ユーザID</label>
+                <input name="userid" value="<%= @user.userid %>" required class='form-control bootstrap-text'>
+            </div>
+            <div class="form-group">
+                <label>パスワード</label>
+                <input type="password" name="password" value="<%= @user.password %>" placeholder="再入力" required class='form-control bootstrap-text'>
+            </div>
+            <div class="form-group">
+                <label>名前</label>
+                <input name="name" value="<%= @user.name %>" required class='form-control bootstrap-text'>
+            </div>
+            <div class="form-group">
+                <label>退職</label>
+                <input type="hidden" name="enrolledFlag" value="<%= 1 %>">
+                <input type="checkbox" name="enrolledFlag" value="<%= 0 %>" class='form-control bootstrap-text'>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <label>最終更新日</label>
+                    </div>
+                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                        <%= @user.updated_at.strftime("%Y / %m / %d ") %>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="userid" value="<%= @user.userid %>">
+            <input type="submit" value="更新" class="btn btn-default">
+        <% end %>
+    </div>
+</div>
