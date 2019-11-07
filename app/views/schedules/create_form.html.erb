@@ -1,0 +1,59 @@
+<div class="create-container">
+    <div class="box-heading">
+        次月シフト作成
+    </div>
+    <div class="box-body">
+        <div class="form-title">
+            <h1><%= @currentYear %>年</h1>
+            <h2><%= @nextMonth %>月</h2>
+        </div>
+        <%= form_tag("/schedules/create",method: :post) do %>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <th></th>
+                        <% for day in 1..@lastDay %>
+                            <th><%= day %><br><%= %w(日 月 火 水 木 金 土)[Date.new(@currentYear,@nextMonth,day).wday]%></th>
+                        <% end %>
+                    </thead>
+                    <tbody>
+                    <!-- ユーザの数loop -->
+                    <% @users.each do |user|  %>
+                    <tr>
+                        <th rowspan="2">
+                            <%= user.userid %>
+                            <%= user.name %>
+                        </th>
+                        <% for day in 1..@lastDay %>
+                        <td>
+                            <!-- シフト入力 -->
+                            <%= time_select("schedule[#{user.userid}][#{day}][timeToIn]",:time,{prompt: true,ignore_data: true,:minute_step => 30,:index => day,include_blank: true}, {class: "form-control bootstrap-date"}) %>
+                            　-　
+                            <%= time_select("schedule[#{user.userid}][#{day}][timeToOut]",:time,{prompt: true,ignore_data: true,:minute_step => 30,:index => day,include_blank: true}, {class: "form-control bootstrap-date"}) %>
+                        </td>
+                        <% end %>
+                    </tr>
+                    <tr>
+                        <% for day in 1..@lastDay %>
+                        <td>
+                            <% @requests["#{user.userid}"].each do |request|  %>
+                                <% if request.day == day %>
+                                    <!-- シフト希望  出勤時刻-退勤時刻 -->
+                                    <%= request.timeToIn.strftime("%H:%M") + "　-　" + request.timeToOut.strftime("%H:%M")%>
+                                <% end %>
+                            <% end %>
+                        </td>
+                        <% end %>
+                    </tr>
+                    <% end %>
+                    </tbody>
+                </table>
+            </div>
+            <input type="hidden" name="year" value="<%= @currentYear %>">
+            <input type="hidden" name="month" value="<%= @nextMonth %>">
+            <input type="hidden" name="lastDay" value="<%= @lastDay %>">
+            <input type="hidden" name="users" value="<%= @users %>">
+            <input type="submit" value="登録" class="btn btn-default">
+        <% end %>
+    </div>
+</div>

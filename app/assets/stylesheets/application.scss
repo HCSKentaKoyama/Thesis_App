@@ -51,6 +51,14 @@ body {
     clear: both;
 }
 
+.create-container{
+    max-width: qw00px;
+    margin: 30px auto;
+    padding-left: 30px;
+    padding-right: 30px;
+    clear: both;
+}
+
 .box-heading{
     font-weight: 300;
     margin: 60px 0 20px;
@@ -129,4 +137,25 @@ p {
     overflow-x: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar;
     -webkit-overflow-scrolling: touch;
+}
+
+.table thead th {
+    /* 縦スクロール時に固定する */
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    /* tbody内のセルより手前に表示する */
+    z-index: 1;
+}
+
+.table th:first-child {
+    /* 横スクロール時に固定する */
+    position: -webkit-sticky;
+    position: sticky;
+    left: 0;
+}
+
+.table thead th:first-child {
+    /* ヘッダー行内の他のセルより手前に表示する */
+    z-index: 2;
 }

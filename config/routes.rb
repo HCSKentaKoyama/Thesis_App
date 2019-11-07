@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   get "entry" => "requests#entry_form"
   post "requests/entry" => "requests#entry"
 
+  get "create" => "schedules#create_form"
+  post "schedules/create" => "schedules#create"
+
   get "index" => "users#index"
   get "/" => "users#index"
 end
