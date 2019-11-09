@@ -15,11 +15,13 @@ class RequestsController < ApplicationController
         @nextMonth.to_i
         @lastDay.to_i
 
+        #現在のシフト希望を取得
+        @requests = Request.where(userid: @current_user.userid,year: @currentYear,month: @nextMonth).order(day: "ASC")
     end
 
     def entry
         # 再登録に備えて初期化
-            Request.new.deleteAllRecodes(@current_user.userid,params[:year],params[:month])
+        Request.new.deleteAllRecodes(@current_user.userid,params[:year],params[:month])
 
         # 登録処理
         for day in 1..params[:lastDay].to_i
