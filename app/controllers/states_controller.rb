@@ -1,7 +1,7 @@
 require "state.rb"
 
 class StatesController < ApplicationController
-    before_action :authenticate_user, {only: [:create_form,:create]}
+    before_action :authenticate_user, {only: [:released,:unreleased,:list]}
     before_action :forbid_login_user, {only: []}
 
     def released
@@ -38,4 +38,7 @@ class StatesController < ApplicationController
         redirect_to("/")
     end
 
+    def list
+        @states = State.all
+    end
 end
