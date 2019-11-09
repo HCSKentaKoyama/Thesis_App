@@ -21,13 +21,20 @@ class SchedulesController < ApplicationController
         # 希望シフトの取得
         @requests = {}
         @users.each do |user|
-            #@requests = {"#{user.userid}": Request.where(yeer: @currentYear,month: @nextMonth,userid: user.userid).order(day: "ASC")}
             @requests["#{user.userid}"] = Request.where(year: @currentYear,month: @nextMonth,userid: user.userid).order(day: "ASC")
         end
 
+        #　現在のスケジュールの取得
+        @schedules = {}
+        @users.each do |user|
+            @schedules["#{user.userid}"] = Schedule.where(year: @currentYear,month: @nextMonth,userid: user.userid).order(day: "ASC")
+        end
     end
 
     def create
+        # 再登録のための初期化
+        Schedule.new.deleteRecodes(params[:year],params[:month])
+
         # 登録処理
         @users = User.where(enrolledFlag: 1)
         @users.each do |user|

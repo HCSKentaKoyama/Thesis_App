@@ -25,11 +25,25 @@
                             <%= user.name %>
                         </th>
                         <% for day in 1..@lastDay %>
+                            <% defaultTimeToIn = "" %>
+                            <% defaultTimeToOut = "" %>
+                            <% @schedules["#{user.userid}"].each do |schedule|  %>
+                                <% if schedule.day == day %>
+                                    <%  defaultTimeToIn = Time.parse("#{schedule.timeToIn}")%>
+                                    <%  defaultTimeToOut = Time.parse("#{schedule.timeToOut}")%>
+                                <% end %>
+                            <% end %>
                         <td>
-                            <!-- シフト入力 -->
-                            <%= time_select("schedule[#{user.userid}][#{day}][timeToIn]",:time,{prompt: true,ignore_data: true,:minute_step => 30,:index => day,include_blank: true}, {class: "form-control bootstrap-date"}) %>
-                            　-　
-                            <%= time_select("schedule[#{user.userid}][#{day}][timeToOut]",:time,{prompt: true,ignore_data: true,:minute_step => 30,:index => day,include_blank: true}, {class: "form-control bootstrap-date"}) %>
+                            <% if (defaultTimeToIn == "") && (defaultTimeToOut == "")%>
+                                <!-- シフト入力 -->
+                                <%= time_select("schedule[#{user.userid}][#{day}][timeToIn]",:time,{prompt: true,ignore_data: true,:minute_step => 30,:index => day,include_blank: true}, {class: "form-control bootstrap-date"}) %>
+                                　-　
+                                <%= time_select("schedule[#{user.userid}][#{day}][timeToOut]",:time,{prompt: true,ignore_data: true,:minute_step => 30,:index => day,include_blank: true}, {class: "form-control bootstrap-date"}) %>
+                            <% else %>
+                                <%= time_select("schedule[#{user.userid}][#{day}][timeToIn]",:time,{selected: defaultTimeToIn,prompt: true,ignore_data: true,:minute_step => 30,:index => day,include_blank: true}, {class: "form-control bootstrap-date"}) %>
+                                　-　
+                                <%= time_select("schedule[#{user.userid}][#{day}][timeToOut]",:time,{selected: defaultTimeToOut,prompt: true,ignore_data: true,:minute_step => 30,:index => day,include_blank: true}, {class: "form-control bootstrap-date"}) %>
+                            <% end %>
                         </td>
                         <% end %>
                     </tr>

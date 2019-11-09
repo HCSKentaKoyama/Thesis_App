@@ -44,10 +44,10 @@
                             </td>
                         <% else %>
                             <td>
-                                <%= time_select('request[timeToIn]',:time,{selected: defaultTimeToIn,prompt: true,ignore_data: true,:minute_step => 30,:index => day},{class: "form-control bootstrap-date"}) %>
+                                <%= time_select('request[timeToIn]',:time,{selected: defaultTimeToIn,prompt: true,ignore_data: true,:minute_step => 30,:index => day,include_blank: true},{class: "form-control bootstrap-date"}) %>
                             </td>
                             <td>
-                                <%= time_select('request[timeToOut]',:time,{selected: defaultTimeToOut,prompt: true,ignore_data: true,:minute_step => 30,:index => day}, {class: "form-control bootstrap-date"}) %>
+                                <%= time_select('request[timeToOut]',:time,{selected: defaultTimeToOut,prompt: true,ignore_data: true,:minute_step => 30,:index => day,include_blank: true}, {class: "form-control bootstrap-date"}) %>
                             </td>
                         <% end %>
                     </tr>

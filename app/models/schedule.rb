@@ -19,4 +19,10 @@ class Schedule < ApplicationRecord
         lastDate = Date.new(year.to_i,month.to_i,-1)
         return lastDate.day
     end
+
+    # 該当年・月のレコードを全て削除する
+    def deleteRecodes(year,month)
+        Schedule.where(year: year,month: month).delete_all
+        return
+    end
 end
