@@ -1,7 +1,7 @@
 require "schedule.rb"
 
 class SchedulesController < ApplicationController
-    before_action :authenticate_user, {only: [:create_form,:create]}
+    before_action :authenticate_user, {only: [:create_form,:create,:show]}
     before_action :forbid_login_user, {only: []}
 
     def create_form
@@ -54,6 +54,19 @@ class SchedulesController < ApplicationController
             redirect_to("/released/#{params[:year]}/#{params[:month]}")
         else
             redirect_to("/unreleased/#{params[:year]}/#{params[:month]}")
+        end
+    end
+
+    def show
+        @year = params[:year].to_i
+        @month = params[:month].to_i
+        @lastDay = Schedule.new.getNextMonthLastDay(@year,@month)
+
+        # シフトをユーザごとに取得
+        @users = User.where(enrolledFlag: 1)
+        @schedules = {}
+        @users.each do |user|
+            @schedules["#{user.userid}"] = Schedule.where(year: @year,month: @month,userid: user.userid).order(day: "ASC")
         end
     end
 end

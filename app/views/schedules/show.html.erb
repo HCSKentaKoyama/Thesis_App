@@ -1,0 +1,42 @@
+<div class="create-container">
+    <div class="box-heading">
+        勤務スケジュール
+    </div>
+    <div class="box-body">
+        <div class="form-title">
+            <h1><%= @year %>年</h1>
+            <h2><%= @month %>月</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <th></th>
+                    <% for day in 1..@lastDay %>
+                        <th><%= day %><br><%= %w(日 月 火 水 木 金 土)[Date.new(@year,@month,day).wday]%></th>
+                    <% end %>
+                </thead>
+                <tbody>
+                <!-- ユーザの数loop -->
+                <% @users.each do |user|  %>
+                <tr>
+                    <th>
+                        <%= user.userid %>
+                        <%= user.name %>
+                    </th>
+                    <% for day in 1..@lastDay %>
+                    <td>
+                        <% @schedules["#{user.userid}"].each do |schedule|  %>
+                            <% if schedule.day == day %>
+                                <!-- シフト希望  出勤時刻-退勤時刻 -->
+                                <%= schedule.timeToIn.strftime("%H:%M") + "　-　" + schedule.timeToOut.strftime("%H:%M")%>
+                            <% end %>
+                        <% end %>
+                    </td>
+                    <% end %>
+                </tr>
+                <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   get "create" => "schedules#create_form"
   post "schedules/create" => "schedules#create"
+  get "show/:year/:month" => "schedules#show"
 
   get "schedule/list" => "states#list"
   get "released/:year/:month" => "states#released"
