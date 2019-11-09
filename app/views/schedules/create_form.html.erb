@@ -53,7 +53,8 @@
             <input type="hidden" name="month" value="<%= @nextMonth %>">
             <input type="hidden" name="lastDay" value="<%= @lastDay %>">
             <input type="hidden" name="users" value="<%= @users %>">
-            <input type="submit" value="登録" class="btn btn-default">
+            <%= submit_tag "登録",{name: "submit_entry",class: "btn btn-default"}%>
+            <%= submit_tag "途中保存(公開されない)",{name: "submit_unreleased",class: "btn btn-default"} %>
         <% end %>
     </div>
 </div>

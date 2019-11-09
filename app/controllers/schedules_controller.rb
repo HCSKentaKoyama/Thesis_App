@@ -49,6 +49,11 @@ class SchedulesController < ApplicationController
                 end
             end
         end
-        redirect_to("/index")
+
+        if params[:submit_entry]
+            redirect_to("/released/#{params[:year]}/#{params[:month]}")
+        else
+            redirect_to("/unreleased/#{params[:year]}/#{params[:month]}")
+        end
     end
 end

@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   get "create" => "schedules#create_form"
   post "schedules/create" => "schedules#create"
 
+  get "released/:year/:month" => "states#released"
+  get "unreleased/:year/:month" => "states#unreleased"
+
   get "index" => "users#index"
   get "/" => "users#index"
 end
